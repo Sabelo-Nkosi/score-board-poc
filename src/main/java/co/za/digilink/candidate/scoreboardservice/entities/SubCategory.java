@@ -19,8 +19,7 @@ public class SubCategory implements Serializable {
     @JoinColumn(name = "categoryid")
     private Category category;
 
-    @JsonIgnore
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "scoreid")
     private Score score;
 
@@ -56,4 +55,11 @@ public class SubCategory implements Serializable {
         this.category = category;
     }
 
+    public Score getScore() {
+        return score;
+    }
+
+    public void setScore(Score score) {
+        this.score = score;
+    }
 }

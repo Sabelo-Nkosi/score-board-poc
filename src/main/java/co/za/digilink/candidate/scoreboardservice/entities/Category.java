@@ -1,13 +1,9 @@
 package co.za.digilink.candidate.scoreboardservice.entities;
 
-import co.za.digilink.candidate.scoreboardservice.entities.SubCategory;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -26,7 +22,7 @@ public class Category implements Serializable {
         this.id = id;
     }
 
-    @OneToMany(mappedBy = "category",cascade = CascadeType.ALL,fetch = FetchType.LAZY, orphanRemoval = false)
+    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = false)
     private Set<SubCategory> subCategory = new HashSet<>();
 
     public Integer getId() {
@@ -36,6 +32,7 @@ public class Category implements Serializable {
     public void setId(Integer id) {
         this.id = id;
     }
+
     @Column(length = 50, nullable = false)
     public String getName() {
         return name;

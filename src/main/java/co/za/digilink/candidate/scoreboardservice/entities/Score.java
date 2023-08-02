@@ -3,20 +3,19 @@ package co.za.digilink.candidate.scoreboardservice.entities;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.List;
 
 @Entity
 @Table(schema = "SCORE_BOARD")
-public class Score {
+public class Score implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private BigDecimal rating;
     private String description;
-    @JsonIgnore
-    @OneToOne(orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private SubCategory subCategories;
 
     public Integer getId() {
         return id;
@@ -42,13 +41,6 @@ public class Score {
         this.description = description;
     }
 
-    public SubCategory getSubCategories() {
-        return subCategories;
-    }
-
-    public void setSubCategories(SubCategory subCategories) {
-        this.subCategories = subCategories;
-    }
 
     @Override
     public boolean equals(Object o) {

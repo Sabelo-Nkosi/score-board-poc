@@ -1,5 +1,12 @@
 
 spring:
+  profiles:
+    default: local
+---
+spring:
+  config:
+    activate:
+      on-profile: local
   jpa:
     show-sql: true
     database-platform: org.hibernate.dialect.H2Dialect
@@ -18,3 +25,31 @@ spring:
       default-media-type: application/json
       default-page-size: 10
       base-path: v1/
+
+---
+spring:
+  config:
+    activate:
+      on-profile: poc
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.SQLServerDialect
+  datasource:
+    url: jdbc:sqlserver://hbcdvdb101.harambee.co.za/dev_db;DB_CLOSE_ON_EXIT=FALSE;Mode=Oracle;INIT=CREATE SCHEMA IF NOT EXISTS SCORE_BOARD;trustServerCertificate=true
+    username: dev_poc
+    password:
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+  h2:
+    console:
+      path: /h2-console
+  data:
+    rest:
+      default-media-type: application/json
+      default-page-size: 10
+      base-path: v1/
+      detection-strategy:

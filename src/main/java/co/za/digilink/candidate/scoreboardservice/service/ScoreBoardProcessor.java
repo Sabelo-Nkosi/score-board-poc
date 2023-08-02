@@ -28,7 +28,7 @@ public class ScoreBoardProcessor extends Processor<Integer ,Category> {
             //TODO:  check if it persists cat ID on subcategory
             //adjudicateSubcategoryLinks( category.getSubCategory());
 
-            Category persistedCat = categoryService.persist(category);
+            final Category persistedCat = categoryService.persist(category);
             adjudicateSubcategoryLinks(persistedCat, persistedCat.getSubCategory());
         } else {
             final Category category1 = categoryService.getById(category.getId());
