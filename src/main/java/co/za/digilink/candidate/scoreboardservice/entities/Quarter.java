@@ -39,21 +39,4 @@ public class Quarter implements Serializable {
         this.description = description;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Quarter quarter)) return false;
-
-        if (!getId().equals(quarter.getId())) return false;
-        if (!getName().equals(quarter.getName())) return false;
-        return getDescription() != null ? getDescription().equals(quarter.getDescription()) : quarter.getDescription() == null;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = getId().hashCode();
-        result = 31 * result + getName().hashCode();
-        result = 31 * result + (getDescription() != null ? getDescription().hashCode() : 0);
-        return result;
-    }
 }
