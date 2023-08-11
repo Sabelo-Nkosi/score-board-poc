@@ -22,8 +22,12 @@ public class ScoreBoardProcessor extends Processor<Integer ,Category> {
     }
 
     @Override
-    @Transactional
     public void process(Integer categoryID, Category category) {
+    }
+
+    @Override
+    @Transactional
+    public void process(Category category) {
         if (Objects.isNull(category.getId())) {
             //TODO:  check if it persists cat ID on subcategory
             //adjudicateSubcategoryLinks( category.getSubCategory());

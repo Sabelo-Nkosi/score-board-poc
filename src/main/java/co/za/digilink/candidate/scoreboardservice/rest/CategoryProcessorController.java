@@ -7,6 +7,7 @@ import co.za.digilink.candidate.scoreboardservice.service.ScoreBoardRetriever;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -22,15 +23,18 @@ public class CategoryProcessorController {
     }
 
     @PostMapping
-    public Category process(@RequestBody Category category) {
-        Integer categoryID = null;
-        scoreBoardProcessor.process(categoryID, category);
-        return category;
+    public List<Category> bulkProcessor(@RequestBody Category[] categories) {
+        for (Category category: categories) {
+            Integer categoryID = null;
+            scoreBoardProcessor.process( category);
+        }
+        return List.of(categories);
     }
 
     @GetMapping("/fetch")
-    public List<Category> process() {
+    public List<Category> retreive() {
         return this.scoreBoardRetriever.getFullCategories();
     }
+
 
 }
