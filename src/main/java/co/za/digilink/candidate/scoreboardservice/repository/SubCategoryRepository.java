@@ -5,10 +5,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
-import java.util.List;
+import java.util.Set;
 
 @Repository
 @CrossOrigin("*")
 public interface SubCategoryRepository extends JpaRepository<SubCategory, Long> {
-    List<SubCategory> findSubCategoryByCategory_Id(Integer id);
+    Set<SubCategory> findSubCategoryByCategory_Id(Integer id);
 }

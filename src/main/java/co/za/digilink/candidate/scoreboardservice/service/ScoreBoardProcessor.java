@@ -9,9 +9,10 @@ import org.springframework.stereotype.Service;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
-public class ScoreBoardProcessor extends Processor<Integer ,Category> {
+public class ScoreBoardProcessor extends Processor<Integer, Category> {
     private final CategoryService categoryService;
     private final SubCategoryService subCategoryService;
 
@@ -36,16 +37,27 @@ public class ScoreBoardProcessor extends Processor<Integer ,Category> {
             adjudicateSubcategoryLinks(persistedCat, persistedCat.getSubCategory());
         } else {
             final Category category1 = categoryService.getById(category.getId());
+            mapProperties(category1, category);
+            final Category persistedCat = categoryService.persist(category);
+            adjudicateSubcategoryLinks(category1, category.getSubCategory());
         }
     }
 
-    private void adjudicateSubcategoryLinks(Category category,  Set<SubCategory> subCategory) {
+    private void mapProperties(Category category1, Category category) {
+        category1.setName(category.getName());
+        category1.setDescription(category.getDescription());
+        category1.setSubCategory(category.getSubCategory());
+    }
+
+    private void adjudicateSubcategoryLinks(Category category, Set<SubCategory> subCategory) {
         category.setSubCategory(new HashSet<>());
-        subCategory.forEach( subCat -> {
-        subCat.setCategory(new Category());
+        final Set<SubCategory> toPersist = new HashSet<>();
+        subCategory.stream().filter(val -> val.getCategory() == null).collect(Collectors.toSet()).forEach(subCat -> {
             subCat.setCategory(category);
+            toPersist.add(subCat);
         });
-        subCategoryService.createAll(subCategory);
+
+        subCategoryService.createAll(toPersist);
     }
 
 

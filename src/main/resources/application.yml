@@ -1,4 +1,3 @@
-
 spring:
   profiles:
     default: local
@@ -30,20 +29,16 @@ spring:
 spring:
   config:
     activate:
-      on-profile: poc
+      on-profile: pgSql
   jpa:
     show-sql: true
     hibernate:
-      ddl-auto: update
-
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.SQLServerDialect
+      ddl-auto: none
   datasource:
-    url: jdbc:sqlserver://hbcdvdb101.harambee.co.za/dev_db;DB_CLOSE_ON_EXIT=FALSE;Mode=Oracle;INIT=CREATE SCHEMA IF NOT EXISTS SCORE_BOARD;trustServerCertificate=true
-    username: dev_poc
-    password:
-    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    url: jdbc:postgresql://localhost:3001/digilink_dev_db
+    driver-class-name: org.postgresql.Driver
+    password: Merc4503b
+    username: dev_user
   h2:
     console:
       path: /h2-console
@@ -52,4 +47,3 @@ spring:
       default-media-type: application/json
       default-page-size: 10
       base-path: v1/
-      detection-strategy:
