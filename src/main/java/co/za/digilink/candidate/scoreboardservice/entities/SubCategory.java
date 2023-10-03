@@ -19,19 +19,19 @@ import java.io.Serializable;
 public class SubCategory implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "SUB_CATEGORYID")
+    @Column(name = "SUB_CATEGORY_ID")
     private Long id;
     private String name;
 
     private String Description;
 
     @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "categoryid")
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    @JoinColumn(name = "category_id")
     private Category category;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
-    @JoinColumn(name = "scoreid")
+    @JoinColumn(name = "score_id")
     private Score score;
 
     public void setId(Long id) {

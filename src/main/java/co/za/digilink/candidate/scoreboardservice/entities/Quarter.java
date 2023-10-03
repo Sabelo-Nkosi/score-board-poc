@@ -14,7 +14,7 @@ import java.io.Serializable;
 public class Quarter implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "QUARTERID")
+    @Column(name = "QUARTER_ID")
     private Integer id;
 
     private String name;

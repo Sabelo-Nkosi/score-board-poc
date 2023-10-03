@@ -10,11 +10,11 @@ import jakarta.persistence.Table;
 import java.io.Serializable;
 
 @Entity
-@Table(schema = "SCORE_BOARD")
+@Table(schema = "SCORE_BOARD", name = "QUARTER_RATING")
 public class QuarterRating implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "QUARTER_RATINGID")
+    @Column(name = "quarter_rating_id")
     private Long id;
 
     private String name;

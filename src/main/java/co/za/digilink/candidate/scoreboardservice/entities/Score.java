@@ -18,7 +18,7 @@ public class Score implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "SCOREID")
+    @Column(name = "SCORE_ID")
     private Integer id;
     private BigDecimal rating;
     private String description;

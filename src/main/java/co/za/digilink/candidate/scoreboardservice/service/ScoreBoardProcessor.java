@@ -30,15 +30,12 @@ public class ScoreBoardProcessor extends Processor<Integer, Category> {
     @Transactional
     public void process(Category category) {
         if (Objects.isNull(category.getId())) {
-            //TODO:  check if it persists cat ID on subcategory
-            //adjudicateSubcategoryLinks( category.getSubCategory());
-
             final Category persistedCat = categoryService.persist(category);
             adjudicateSubcategoryLinks(persistedCat, persistedCat.getSubCategory());
         } else {
             final Category category1 = categoryService.getById(category.getId());
             mapProperties(category1, category);
-            final Category persistedCat = categoryService.persist(category);
+            final Category persistedCat = categoryService.persist(category1);
             adjudicateSubcategoryLinks(category1, category.getSubCategory());
         }
     }
@@ -46,7 +43,7 @@ public class ScoreBoardProcessor extends Processor<Integer, Category> {
     private void mapProperties(Category category1, Category category) {
         category1.setName(category.getName());
         category1.setDescription(category.getDescription());
-        category1.setSubCategory(category.getSubCategory());
+       // adjudicateSubcategoryLinks(category1, category.getSubCategory());
     }
 
     private void adjudicateSubcategoryLinks(Category category, Set<SubCategory> subCategory) {
